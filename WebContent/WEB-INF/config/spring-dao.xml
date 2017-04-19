@@ -2,15 +2,36 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"  
        xmlns:context="http://www.springframework.org/schema/context"  
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
-       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd  
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">  
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd  
+       http://mybatis.org/schema/mybatis-spring 
+       http://mybatis.org/schema/mybatis-spring.xsd  
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd">  
       
     <!-- 该包下的类支持注解，表示会被当作{@code mybatis mapper}处理 配置了之后表示可以自动引入mapper类-->  
     <mybatis:scan base-package="com.alibaba.dao"/>  
     <!--引入属性文件 -->  
     <context:property-placeholder location="classpath:jdbc.properties"/>  
       
+    <cache:annotation-driven/>
+    
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="default"/>
+                </bean>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="accountCache"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+     
     <!--数据库连接-->  
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">   
         <property name="url" value="${jdbc.url}" />  
