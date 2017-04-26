@@ -13,7 +13,7 @@ public class UserService {
 	@Autowired
 	private UserD userDao;
 	
-	@Cacheable(value="accountCache")
+	@Cacheable(value="accountCache",key="username")
 	public User findUserByName(String username) {
 		User user = userDao.findUserByName(username);
 		System.out.println("get DB!");

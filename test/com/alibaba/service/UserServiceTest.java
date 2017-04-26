@@ -14,7 +14,7 @@ public class UserServiceTest
 {
 
 	@Resource
-	UserService userService;
+	private UserService userService;
 	@Before
 	public void setUp() throws Exception {
 	}

@@ -65,4 +65,13 @@
 <!--         <property name="mapperLocations" value="classpath*:com/alibaba/dao/*.xml" /> -->
     </bean>
 
+    <bean id="jdbcTemplate"
+        class="org.springframework.jdbc.core.JdbcTemplate" abstract="false"
+        lazy-init="false" autowire="default">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+<!--     <import resource="sping-quartz.xml"/> -->
+    
 </beans>     
