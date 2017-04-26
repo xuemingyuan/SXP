@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="overwriteExistingJobs" value="true" />
+		<property name="configLocation" value="WEB-INF/quartz.properties" />
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger" />
+				<ref bean="simpleTrigger" />
+			</list>
+		</property>
+	</bean>
+	<bean id="cronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="quartz1" />
+		<!-- run every morning at 6 AM -->
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+
+	<bean id="simpleTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<!-- see the example of method invoking job above -->
+		<property name="jobDetail" ref="quartz2" />
+		<!-- 10 seconds -->
+		<property name="startDelay" value="10000" />
+		<!-- repeat every 50 seconds -->
+		<property name="repeatInterval" value="50000" />
+	</bean>
+
+	<bean id="quartz1"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="quartzJob" />
+		<property name="targetMethod" value="quartz1" />
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<bean id="quartz2"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="quartzJob" />
+		<property name="targetMethod" value="quartz2" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="quartzJob" class="com.alibaba.quartz.QuartzTaskMethod"></bean>
+</beans>
