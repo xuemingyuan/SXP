@@ -1,0 +1,5 @@
+<sqlList>
+	<sql id="SQL_QUERY_DEAL_BY_ID"><![CDATA[
+		select id, username, password from t_user where username = ?   
+	]]></sql>
+</sqlList>
