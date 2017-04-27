@@ -7,11 +7,19 @@ import com.alibaba.dao.UserSpringJdbcDao;
 import com.alibaba.model.User;
 
 @Service("userSpringJdbcService")
-public class UserSpringJdbcService {
-
-	@Autowired
-	private UserSpringJdbcDao userSpringJdbcDao;
-	public User findUserByName(String username) {
-		return userSpringJdbcDao.findUserByName(username);
-	}
+public class UserSpringJdbcService
+{
+    
+    @Autowired
+    private UserSpringJdbcDao userSpringJdbcDao;
+    
+    public User findUserByName(String username)
+    {
+        return userSpringJdbcDao.findUserByName(username);
+    }
+    
+    public User findUserByName3(String username)
+    {
+        return userSpringJdbcDao.findUserByName3(username);
+    }
 }

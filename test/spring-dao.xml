@@ -74,4 +74,7 @@
         </property>
     </bean>
     
+       <bean id="sqlResource" class="sqlmanager.SQLResource"
+        init-method="init">
+    </bean>
 </beans>     

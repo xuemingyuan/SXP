@@ -74,4 +74,13 @@
     </bean>
 <!--     <import resource="sping-quartz.xml"/> -->
     
+    <bean id="sqlResource" class="sqlmanager.SQLResource"
+        init-method="init">
+        <property name="locations">
+            <list>
+                <value>sql-mapper.xml</value>
+<!--                 <value>classpath:common.hql.xml</value> -->
+            </list>
+        </property>
+    </bean>
 </beans>     

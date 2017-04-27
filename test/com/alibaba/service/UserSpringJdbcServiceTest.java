@@ -18,7 +18,7 @@ public class UserSpringJdbcServiceTest {
 	
 	@Test
 	public void test() {
-		User user =userSpringJdbcService.findUserByName("a");
+		User user =userSpringJdbcService.findUserByName3("a");
 		System.out.println(user.toString());
 	}
 
