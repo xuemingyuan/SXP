@@ -78,8 +78,8 @@
         init-method="init">
         <property name="locations">
             <list>
-                <value>sql-mapper.xml</value>
-<!--                 <value>classpath:common.hql.xml</value> -->
+<!--                 <value>/WEB-INF/sql/sql-mapper.xml</value> -->
+                <value>classpath:sql-mapper.xml</value>
             </list>
         </property>
     </bean>

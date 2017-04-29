@@ -76,5 +76,11 @@
     
        <bean id="sqlResource" class="sqlmanager.SQLResource"
         init-method="init">
+        <property name="locations">
+            <list>
+<!--                 <value>/WEB-INF/sql/sql-mapper.xml</value> -->
+                <value>classpath:sql-mapper.xml</value>
+            </list>
+        </property>
     </bean>
 </beans>     

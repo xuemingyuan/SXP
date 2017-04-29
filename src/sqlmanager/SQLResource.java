@@ -1,7 +1,6 @@
 
 package sqlmanager;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -10,26 +9,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.digester3.Digester;
-import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
 import org.dom4j.tree.DefaultElement;
 import org.omg.CORBA.SystemException;
+import org.springframework.core.io.Resource;
 import org.xml.sax.SAXException;
 
 public class SQLResource
 {
-//    private String[] locations;
-//    
-//    public String[] getLocations()
-//    {
-//        return locations;
-//    }
-//    
-//    public void setLocations(String[] locations)
-//    {
-//        this.locations = locations;
-//    }
+    private Resource[] locations;
+    
+    public Resource[] getLocations()
+    {
+        return locations;
+    }
+    
+    public void setLocations(Resource[] locations)
+    {
+        this.locations = locations;
+    }
     
     private Properties properties = new Properties();
     
@@ -43,39 +42,41 @@ public class SQLResource
         this.properties = properties;
     }
     
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
+        throws Exception
     {
-        SQLResource sqlresource= new SQLResource();  
+        SQLResource sqlresource = new SQLResource();
         sqlresource.init();
     }
-    public void init() throws Exception
+    
+    public void init()throws Exception
     {
-//        for (String path : locations)
-//        {
-        SAXReader reader = new SAXReader();
-        Document document = reader.read(new File("D:/sql-mapper.xml"));// 读取XML文件
-       List list= document.selectNodes("//sql");
-        for(int i=0;i<list.size();i++)
-       {
-          DefaultElement e =  (DefaultElement)list.get(i);
-          String key =e.attribute("id").getData().toString();
-          String value = e.getData().toString();
-          addSqlInfo(key,value);
-       }
-//            InputStream is = new FileInputStream(SQLResource.class.getResource("/")+"WEB-INF/sql/sql-mapper.xml");
-//            try
-//            {
-//                loadSqlFile(is);
-//            }
-//            catch (Exception e)
-//            {
-//                e.printStackTrace();
-//            }
-//            finally
-//            {
-//                is.close();
-//            }
-//        }
+        for (Resource path : locations)
+        {
+            SAXReader reader = new SAXReader();
+            Document document = reader.read(path.getFile());// 读取XML文件
+            List list = document.selectNodes("//sql");
+            for (int i = 0; i < list.size(); i++)
+            {
+                DefaultElement e = (DefaultElement)list.get(i);
+                String key = e.attribute("id").getData().toString();
+                String value = e.getData().toString();
+                addSqlInfo(key, value);
+            }
+            //            InputStream is = new FileInputStream(SQLResource.class.getResource("/")+"WEB-INF/sql/sql-mapper.xml");
+            //            try
+            //            {
+            //                loadSqlFile(is);
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                e.printStackTrace();
+            //            }
+            //            finally
+            //            {
+            //                is.close();
+            //            }
+        }
     }
     
     private void loadSqlFile(InputStream is)

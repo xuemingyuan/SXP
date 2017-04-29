@@ -52,7 +52,7 @@ public class UserSpringJdbcDao
     public User findUserByName3(String username)
     {
         List<Map<String, Object>> rsList 
-        = jdbcTemplate.queryForList(sqlResource.getProperties().getProperty(Constants.SQL_QUERY_DEAL_BY_ID1), username);
+        = jdbcTemplate.queryForList(sqlResource.getProperties().getProperty(Constants.SQL_QUERY_DEAL_BY_ID), username);
         for (Map<String, Object> map : rsList)
         {
             User user = new User();
