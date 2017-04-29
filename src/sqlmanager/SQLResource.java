@@ -63,19 +63,6 @@ public class SQLResource
                 String value = e.getData().toString();
                 addSqlInfo(key, value);
             }
-            //            InputStream is = new FileInputStream(SQLResource.class.getResource("/")+"WEB-INF/sql/sql-mapper.xml");
-            //            try
-            //            {
-            //                loadSqlFile(is);
-            //            }
-            //            catch (Exception e)
-            //            {
-            //                e.printStackTrace();
-            //            }
-            //            finally
-            //            {
-            //                is.close();
-            //            }
         }
     }
     
