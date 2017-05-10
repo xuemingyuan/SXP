@@ -42,8 +42,7 @@ public class SQLResource
         this.properties = properties;
     }
     
-    public static void main(String[] args)
-        throws Exception
+    public static void main(String[] args) throws Exception
     {
         SQLResource sqlresource = new SQLResource();
         sqlresource.init();
@@ -55,7 +54,7 @@ public class SQLResource
         {
             SAXReader reader = new SAXReader();
             Document document = reader.read(path.getFile());// 读取XML文件
-            List list = document.selectNodes("//sql");
+            List<?> list = document.selectNodes("//sql");
             for (int i = 0; i < list.size(); i++)
             {
                 DefaultElement e = (DefaultElement)list.get(i);
@@ -66,10 +65,8 @@ public class SQLResource
         }
     }
     
-    private void loadSqlFile(InputStream is)
-        throws IOException, SAXException, SystemException
+    private void loadSqlFile(InputStream is) throws Exception
     {
-        
         Digester digester = new Digester();
         // 声明要调用本Class中（this）的方法
         digester.push(this);
@@ -86,13 +83,11 @@ public class SQLResource
         digester.parse(is);
     }
     
-    public void addSqlInfo(final String sqlKey, String sql)
-        throws SystemException
+    public void addSqlInfo(final String sqlKey, String sql) throws Exception
     {
         String sqlValue = sql;
         if (sqlKey == null)
         {
-            //throw new SystemException();
         }
         
         // delete /*...*/
