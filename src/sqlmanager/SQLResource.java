@@ -54,7 +54,7 @@ public class SQLResource
         {
             SAXReader reader = new SAXReader();
             Document document = reader.read(path.getFile());// 读取XML文件
-            List<?> list = document.selectNodes("//sql");
+            List<?> list = document.selectNodes("//SQL");
             for (int i = 0; i < list.size(); i++)
             {
                 DefaultElement e = (DefaultElement)list.get(i);
@@ -72,12 +72,12 @@ public class SQLResource
         digester.push(this);
         
         // 对XML中sqlList/sql阶层中的数据，利用addSqlInfo方法解析，该方法参数个数为2
-        digester.addCallMethod("sqlList/sql", "addSqlInfo", 2);
+        digester.addCallMethod("SQLList/SQL", "addSqlInfo", 2);
         
         // 把sqlId中的值赋给方法的第一个参数
-        digester.addCallParam("sqlList/sql", 0, "id");
+        digester.addCallParam("SQLList/SQL", 0, "id");
         // 把<![CDATA[中的值赋给方法的第二个参数
-        digester.addCallParam("sqlList/sql", 1);
+        digester.addCallParam("SQLList/SQL", 1);
         
         // 解析XML文件
         digester.parse(is);
