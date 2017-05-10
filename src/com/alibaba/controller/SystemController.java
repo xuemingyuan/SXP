@@ -41,7 +41,7 @@ public class SystemController
         return "testHello";
     }
     
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login2")
     public String testLogin(HttpServletRequest request, @RequestParam String username, @RequestParam String password)
     {
         log.info("执行了testLogin方法！");

@@ -83,4 +83,6 @@
             </list>
         </property>
     </bean>
+    
+    <bean id="login" class="com.alibaba.model.Login"></bean>
 </beans>     

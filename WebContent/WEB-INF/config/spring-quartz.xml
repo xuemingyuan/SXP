@@ -23,7 +23,7 @@
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="quartz1" />
 		<!-- run every morning at 6 AM -->
-		<property name="cronExpression" value="0/5 * * * * ?" />
+		<property name="cronExpression" value="0 0 23 * * ?" />
 	</bean>
 
 	<bean id="simpleTrigger"
@@ -33,7 +33,7 @@
 		<!-- 10 seconds -->
 		<property name="startDelay" value="10000" />
 		<!-- repeat every 50 seconds -->
-		<property name="repeatInterval" value="50000" />
+		<property name="repeatInterval" value="500000000" />
 	</bean>
 
 	<bean id="quartz1"
